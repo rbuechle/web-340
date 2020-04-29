@@ -17,7 +17,7 @@ var http = require("http");
 
 function processRequest(req, res) {
 
-var body = "It takes real skills I to choke on air, fall up stairs and to trip over nothing. I have those skills.";
+var body = "It takes real skills to choke on air, fall up stairs and to trip over nothing. I have those skills.";
 
     var contentLength = body.length;
 
