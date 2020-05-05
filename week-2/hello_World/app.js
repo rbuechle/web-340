@@ -8,6 +8,12 @@
 ;===========================================
 */
 
+//prints header for assignment 
+const header = require('../../buechle-header.js');
+console.log (header.display("Rebecca", "Buechle", "2.2_helloWorld_express"));
+
+
+
 //requiring the express module
 var express = require("express");
 
