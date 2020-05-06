@@ -1,0 +1,9 @@
+{
+    "name": "Assignment 2.4 EJS View",
+    "author": "Becca Buechle",
+    "private": true,
+    "dependencies": {
+        "ejs": "^3.1.2",
+        "express": "^4.17.1"
+    }
+}
