@@ -1,6 +1,6 @@
 {
     "name": "hello-world",
-    "author": "Professor Itskovich",
+    "author": "Becca Buechle"
     "private": true,
     "dependencies": {
         "express": "^4.17.1"
