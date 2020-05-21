@@ -9,12 +9,17 @@
 */
 
 
+//prints header for assignment 
+const header = require('../../buechle-header.js');
+console.log (header.display("Rebecca", "Buechle", "4.3_JSON_APIs"));
+
 var express = require("express");
 
 var http = require("http");
 
 var app = express();
 
+//customer get
 app.get("/customer/:id", function (request, response){
     
     var id = parseInt(request.params.id, 10);
