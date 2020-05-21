@@ -21,27 +21,27 @@ var http = require("http");
 var app = express();
 
 
-
+//get request
 app.get("/", function (request, response){
     response.send("API invoked as an HTTP GET request")
 });
 
-
+//put request
 app.put("/", function(request, response) {
     response.send("API invoked as an HTTP PUT request.");
 });
 
-
+//post request
 app.post("/", function(request, response) {
     response.send("API invoked as an HTTP POST request");
 });
 
-
+//delete request
 app.delete("/", function(request, response) {
     response.send("API invoked as an HTTP DELETE request");
 });
 
-
+//server starts on port 8080
 http.createServer(app).listen(8080, function() {
     console.log("Application started on port 8080");
 });
