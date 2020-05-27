@@ -1,0 +1,52 @@
+<!--/*
+============================================
+; Title: Assignment 5.2 EJS Templates
+; Author: Peter Itskovich 
+; Date: 27 May 2020
+; Modified By: Becca Buechle
+; Description: EJS Templates
+;===========================================
+*/-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <title>5.2 </title>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <ul class="navbar-nav">
+        <li class="nav-item active">
+            <a class="nav-link" herf="#">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" herf="#">About</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" herf="#">Contact Us</a>
+        </li>
+    </ul>
+</nav>
+<div class="container">
+    <br/><br/>
+
+    <h2>Dog Names</h2>
+    <br/><br/>
+
+    <% if(names.length > 0) { %>
+        <% for (var k = 0; k < names.length; k++ ) { %>
+            <div class="alert alert-success"><strong><%= names [k] %></strong></div>
+        <% } %>
+    <% } %>
+</div>  
+
+</body>
+
+</html>
