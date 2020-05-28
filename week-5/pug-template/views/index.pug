@@ -1,0 +1,24 @@
+html
+    head
+        title 5.3 Pug Template
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    body
+        nav.navbar.navbar-dark.bg-dark.navbar-expand-sm
+            ul.navbar-nav
+                li.nav-item
+                    a.nav-link(href="#") Home
+                li.nav-item
+                    a.nav-link(href="#") About
+                li.nav-item
+                    a.nav-link(href="#") Contact Us
+        br
+        br
+        div.container
+            div.row
+                div.col-md-12
+                    h2 Working with Pug 
+                    br
+                    br 
+                    p.alert.alert-success= message              
+        
