@@ -1,13 +1,33 @@
-
 <%- include('header') %>
 <%- include('navbar') %>
 
-<div role="main" class="container">
+<!--Dog Pic-->
+<div class="birthday" alt="Birthday Dog">
 
-    <br/><br/>
+    <!--Ordering Form-->
+  <form class="form" action="/action_page.php">
+    <h2>Ordering Form</h2>
+    <label for="fname">First Name:</label><br>
+    <input type="text" id="fname" name="fname" value="John"><br>
 
-    <img class="birthday" src="images/birthday.jpg" alt="Birthday Dog">
+    <label for="lname">Last name:</label><br>
+    <input type="text" id="lname" name="lname" value="Doe"><br><br>
+
+    <p>Select Treato Type:</p>
+    <div>
+      <input type="radio" id="cake" name="cake" value="cake" checked>
+      <label for="cake">Cake</label>
+    </div>
+
+    <div>
+      <input type="radio" id="cupcake" name="cupcake" value="cupcake">
+      <label for="cupcake">Cupcakes</label>
+    </div>
+    </br>
+    <input type="submit" value="Submit">
+  </form>
 
 </div>
+
 
 <%- include('footer') %>
