@@ -10,6 +10,7 @@
 
 var assert = require("assert");
 
+//test
 describe("String#split", function() {
 
     it("should return an array of fruits", function() {
@@ -20,6 +21,7 @@ describe("String#split", function() {
 
 });
 
+//splits a string 
 function getFruits(str) {
 
   return str.split(',');
