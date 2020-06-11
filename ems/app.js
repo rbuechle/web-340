@@ -23,6 +23,7 @@ db.once("open", function(){
 
 app.set("views", path.resolve(__dirname, "views"));
 app.set("view engine", "ejs");
+
 app.use(logger("short"));
 app.use(express.static(path.join(__dirname + '/public')))
 
@@ -35,10 +36,4 @@ app.get("/", function (req, res){
 //start server
 http.createServer(app).listen(8080, function(){
     console.log("Application started on port 8080");
-});
-
-// model
-var employee = new Employee({
-    firstName: "Becca",
-    lastName: "Buechle"
 });
