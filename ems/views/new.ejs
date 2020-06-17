@@ -1,3 +1,38 @@
-<%- include("navbar") -%>
+<!DOCTYPE html>
+<html lang="en">
+  <% include header %>
 
-<%- include("footer") -%>
+  <body>
+    <% include navbar %>
+
+    <div role="main" class="container" style="width: 50%;">
+      <br />
+      <br />
+
+  <h2><%= message %></h2>
+
+    <form method="post" action="/process">
+      <div class="form-group">
+        <label for="txtFirstName">First Name:</label>
+        <input type="text" class="form-control" id="txtFirstName" name="txtFirstName" />
+      </div>
+      
+      <div class="form-group">
+        <label for="txtLastName">Last Name:</label>
+        <input type="text" class="form-control" id="txtLastName" name="txtLastName" />
+      </div>
+
+      <div class="form-group">
+        
+        <!-- CSRF token -->
+        <input name="_csrf" value="<%= csrfToken %>" type="hidden" />
+
+        <button type="submit" class="btn btn-primary float-right">Submit</button>
+      </div>
+    </form>
+
+</div>
+</body>
+<%- include('footer') %>
+</html>
+
