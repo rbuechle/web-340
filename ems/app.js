@@ -49,6 +49,10 @@ app.get('/new', function(req, res) {
     });
   });
 
+  var employee = new Employee({
+    firstName: "Becca",
+    lastName: "Buechle"
+  });
 
 // database connection string to MongoDB 
 var mongoDB = "mongodb+srv://rbuechle:Seattle06@cluster0-japve.mongodb.net/test?retryWrites=true&w=majority"
