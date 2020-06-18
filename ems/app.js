@@ -43,11 +43,23 @@ app.get("/", function (req, res){
     });
 });
 
-app.get('/new', function(req, res) {
+app.get('/new.ejs', function(req, res) {
     res.render('new', {
       message: 'Add a New Employee'
     });
   });
+
+
+  app.get("/list.ejs", function (request, response) {
+    Employee.find({}, (error, employees) => {
+      if (error) throw error;
+      response.render("list", {
+        title: "Employees List",
+        employees: employees
+      });
+    });
+  });
+
 
   var employee = new Employee({
     firstName: "Becca",
