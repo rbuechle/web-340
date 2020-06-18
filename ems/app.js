@@ -55,15 +55,15 @@ app.get('/new', function(req, res) {
   });
 
 
-  app.post(‘/process’, function (req, res) {
-    console.log(req.body.txtFirstName, req.body.txtLastName);
-    if (!req.body.txtFirstName) {
-      res.status(400).send(“Entries must have a name”);
+  app.post("/process", function(request, response) {
+    // console.log(request.body.txtName);
+    if (!request.body.txtName) {
+        response.status(400).send("Entries must have a name");
       return;
     }
     // get the request’s form data
-    var firstName = req.body.txtFirstName;
-    var lastName = req.body.txtLastName;
+    var firstName = request.body.txtFirstName;
+    var lastName = request.body.txtLastName;
     console.log(firstName, lastName);
     // create a employee model
     var employee = new Employee({
@@ -73,14 +73,10 @@ app.get('/new', function(req, res) {
     // save
     employee.save(function (error) {
       if (error) throw error;
-      console.log(firstName + ” saved successfully!“);
+      console.log(firstName + " saved successfully!");
     });
-    res.redirect(‘/’);
+    response.redirect("/");
   });
-  
-
-
-
 
 // database connection string to MongoDB 
 var conn = "mongodb+srv://rbuechle:Seattle06@cluster0-japve.mongodb.net/test?retryWrites=true&w=majority"
