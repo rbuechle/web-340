@@ -100,6 +100,12 @@ db.once("open", function(){
 });
 
 
+
+var employee = new Employee({
+    firstName: 'Becca',
+    lastName: 'Buechle'
+  });
+
 //start server
 http.createServer(app).listen(8080, function(){
     console.log("Application started on port 8080");
