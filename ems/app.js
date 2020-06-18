@@ -57,7 +57,7 @@ app.get('/new', function(req, res) {
 
   app.post("/process", function(request, response) {
     // console.log(request.body.txtName);
-    if (!request.body.txtName) {
+    if (!request.body.txtFirstName || !request.body.txtLastName) {
         response.status(400).send("Entries must have a name");
       return;
     }
@@ -98,7 +98,6 @@ db.on("error", console.error.bind(console, "MongoDB connection error: "));
 db.once("open", function(){
     console.log("Application connected to MongoDB Atlas")
 });
-
 
 
 var employee = new Employee({
