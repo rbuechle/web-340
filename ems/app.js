@@ -45,7 +45,7 @@ app.get("/", function (req, res){
 
 app.get('/new', function(req, res) {
     res.render('new', {
-      message: 'New Emp Page'
+      message: 'Add a New Employee'
     });
   });
 
@@ -55,10 +55,17 @@ app.get('/new', function(req, res) {
   });
 
 // database connection string to MongoDB 
-var mongoDB = "mongodb+srv://rbuechle:Seattle06@cluster0-japve.mongodb.net/test?retryWrites=true&w=majority"
-mongoose.connect(mongoDB,{
-    useMongoClient: true
-});
+var conn = "mongodb+srv://rbuechle:Seattle06@cluster0-japve.mongodb.net/test?retryWrites=true&w=majority"
+mongoose.connect(conn, {
+    promiseLibrary: require('bluebird'),
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useCreateIndex: true,
+  }).then(() => {
+    console.log('Connection to the database instance was successful');
+  }).catch(err => {
+    console.log(`MongoDB Error: ${err.message}`);
+  });
 
 mongoose.Promise = global.Promise;
 
