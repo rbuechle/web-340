@@ -61,6 +61,23 @@ app.get('/new.ejs', function(req, res) {
   });
 
 
+  app.get("/view/:queryName", function (request, response) {
+    var queryName = request.params.queryName;
+    Employee.find({'name': queryName}, function(error, employees) {
+        if (error) throw error;
+        console.log(employees);
+        if (employees.length > 0) {
+            response.render("view", {
+                title: "Employee Records",
+                employee: employees
+            })
+        }
+        else {
+            response.redirect("/list")
+        }
+    });
+  });
+
   var employee = new Employee({
     firstName: "Becca",
     lastName: "Buechle"

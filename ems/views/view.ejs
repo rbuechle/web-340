@@ -1,9 +1,27 @@
-<!---
-======================================
-; Title: EMS app
-; Author: Peter Itskovich
-; Date: 31 May 2020
-; Modified By: Becca Buechle
-; Description: 
-======================================
---->
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('header') -%>
+
+  <body>
+    <%- include('navbar') -%>
+
+    <div role="main" class="container" style="width: 50%;">
+      <br /><br />
+
+      <h2>Employee Records</h2>
+      <br />
+      <div>
+        <div class="form-group">
+          <label for="txtName">Name:</label>
+          <input type="text" class="form-control" id="txtName" value="<%= employee[0].firstName %> <%= employee[0].lastName %>" name="txtName"/>
+        </div>
+      </div>
+
+      <br /><br />
+
+      <a href="/">&larr; OK</a>
+    </div>
+
+    <% include scripts %>
+  </body>
+</html>
