@@ -61,9 +61,9 @@ app.get('/new.ejs', function(req, res) {
   });
 
 
-  app.get("/view.ejs/:queryName", function (request, response) {
+  app.get("/view/:queryName", function (request, response) {
     var queryName = request.params.queryName;
-    Employee.find({'name': queryName}, function(error, employees) {
+    Employee.find({'id': queryName}, function(error, employees) {
         if (error) throw error;
         console.log(employees);
         if (employees.length > 0) {
@@ -93,11 +93,14 @@ app.get('/new.ejs', function(req, res) {
     // get the request’s form data
     var firstName = request.body.txtFirstName;
     var lastName = request.body.txtLastName;
-    console.log(firstName, lastName);
+    var id =  request.body.txtID;
+    console.log(firstName, lastName, id);
+   
     // create a employee model
     var employee = new Employee({
       firstName: firstName,
-      lastName: lastName
+      lastName: lastName,
+      id: id
     });
     // save
     employee.save(function (error) {
