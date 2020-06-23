@@ -61,7 +61,7 @@ app.get('/new.ejs', function(req, res) {
   });
 
 
-  app.get("/view/:queryName", function (request, response) {
+  app.get("/view.ejs/:queryName", function (request, response) {
     var queryName = request.params.queryName;
     Employee.find({'name': queryName}, function(error, employees) {
         if (error) throw error;
