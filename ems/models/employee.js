@@ -6,7 +6,6 @@ var Schema = mongoose.Schema;
 var EmployeeSchema = new Schema({
     firstName: {type: String, required: true },
     lastName: {type: String, required: true},
-    id: {type: String, required: true}
   });
 
 // Export model 

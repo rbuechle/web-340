@@ -1,13 +1,14 @@
 // require statements
 var express = require("express");
 var http = require("http");
+var mongoose = require("mongoose");
 var path = require("path");
 var logger = require("morgan");
-var mongoose = require("mongoose");
 var helmet = require("helmet");
 var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 var csrf = require("csurf");
+var ejsLint = require('ejs-lint');
 var Employee = require('./models/employee');
 
 // setup csrf protection
@@ -43,7 +44,7 @@ app.get("/", function (req, res){
     });
 });
 
-app.get('/new.ejs', function(req, res) {
+app.get("/new.ejs", function(req, res) {
     res.render('new', {
       message: 'Add a New Employee'
     });
@@ -61,19 +62,20 @@ app.get('/new.ejs', function(req, res) {
   });
 
 
-  app.get("/view.ejs/:queryName", function (request, response) {
+  app.get("/view/:queryName.ejs", function (request, response) {
     var queryName = request.params.queryName;
-    Employee.find({'id': queryName}, function(error, employees) {
-        if (error) throw error;
+    Employee.find({"lastName": queryName}, function(error, employees) {
+  
+      if (error) throw error;
         console.log(employees);
-        if (employees.length > 0) {
-            response.render("view", {
-                title: "Employee Records",
-                employee: employees
-            })
-        }
+      if (employees.length > 0) {
+        response.render("view", {
+          title: "Employee Record",
+          employee: employees
+        })
+      }
         else {
-            response.redirect("/list")
+          response.redirect("/list.ejs")
         }
     });
   });
@@ -86,7 +88,7 @@ app.get('/new.ejs', function(req, res) {
 
   app.post("/process", function(request, response) {
     // console.log(request.body.txtName);
-    if (!request.body.txtFirstName || !request.body.txtLastName || !request.body.txtID) {
+    if (!request.body.txtFirstName || !request.body.txtLastName) {
         response.status(400).send("Missing Required Field");
       return;
     }
@@ -94,14 +96,12 @@ app.get('/new.ejs', function(req, res) {
     // get the request’s form data
     var firstName = request.body.txtFirstName;
     var lastName = request.body.txtLastName;
-    var id =  request.body.txtID;
-    console.log(firstName, lastName, id);
+    console.log(firstName, lastName);
    
     // create a employee model
     var employee = new Employee({
       firstName: firstName,
       lastName: lastName,
-      id: id
     });
     
     // save
