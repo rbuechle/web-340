@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang en="us">
-    <body>
         <%- include ('header') -%>
         <%- include ('navbar') -%>
         
@@ -10,7 +7,7 @@
             
         <% if (employee.length) { %>
             <h2>Employee List</h2>
-            <br>
+            <br/><br/>
             
             <table class="table table‐hover">
                 <thead class="thead‐dark">
@@ -21,10 +18,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <% employee.forEach(function (entry) { %>
+                <% employee.forEach(function (employee) { %>
                 <tr>
-                    <td><%= entry.firstName %></td>
-                    <td><%= entry.lastName %></td>
+                    <td><%= employee.firstName %></td>
+                    <td><%= employee.lastName %></td>
                     <td><a href="/view/<%= employee.lastName %>.ejs">View</a></td>
                 </tr>
                 </tbody>
@@ -34,11 +31,9 @@
             <% } else { %>
             No entries! <a href="/new.ejs">Add one!</a>
             <% } %>
-
+            <br/><br/>
             <a href="/new.ejs">Add New</a>
+
       </div>
        
         <%- include ('footer') -%>
-
-    </body>
-</html>

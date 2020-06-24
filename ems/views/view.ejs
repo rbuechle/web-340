@@ -1,28 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
     <%- include('header') -%>
-
-  <body>
     <%- include('navbar') -%>
+
 
     <div role="main" class="container" style="width: 50%;">
       <br /><br />
 
-      <h2>Employee Records</h2>
+      <h2>Employee Record</h2>
       <br />
       <div>
         <div class="form-group">
-          <label for="txtName">Name:</label>
-          <input type="text" class="form-control" id="txtName" readonly value="<%= employee[0].firstName %>" name="txtName"/>
+          <label for="txtFirstName">First Name:</label>
+            <input type="text" class="form-control" id="firstName" value="<%= employee[0].firstName %>" name="firstName" />
+        </div>
+        <div class="form-group">
+          <label for="txtLastName">Last Name:</label>
+            <input type="text" class="form-control" id="lastName" value="<%= employee[0].lastName %>" name="lastName" />
         </div>
       </div>
 
       <br /><br />
 
-      <a href="/">&larr; OK</a>
+      <a href="/list.ejs">&larr; Return to Employee List</a>
+
     </div>
 
-    <%- include scripts -%>
 
-  </body>
-</html>
