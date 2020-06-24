@@ -8,7 +8,7 @@
             
         </br></br>
             
-        <% if (employees.length) { %>
+        <% if (employee.length) { %>
             <h2>Employee List</h2>
             <br>
             
@@ -21,11 +21,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <% employees.forEach(function (entry) { %>
+                <% employee.forEach(function (entry) { %>
                 <tr>
                     <td><%= entry.firstName %></td>
                     <td><%= entry.lastName %></td>
-                    <td><a href="/view/<%= employees.lastName %>.ejs">View</a></td>
+                    <td><a href="/view/<%= employee.lastName %>.ejs">View</a></td>
                 </tr>
                 </tbody>
                 <% }) %>

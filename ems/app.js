@@ -1,21 +1,36 @@
 // require statements
 var express = require("express");
 var http = require("http");
-var mongoose = require("mongoose");
 var path = require("path");
 var logger = require("morgan");
 var helmet = require("helmet");
+var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 var csrf = require("csurf");
 var ejsLint = require('ejs-lint');
 var Employee = require('./models/employee');
 
+// initialize express
+var app = express();
+
 // setup csrf protection
 var csrfProtection = csrf({cookie: true});
 
-// initialize express
-var app = express();
+// database connection string to MongoDB 
+var conn = "mongodb+srv://rbuechle:Seattle06@cluster0-japve.mongodb.net/test?retryWrites=true&w=majority"
+
+mongoose.Promise = global.Promise;
+
+var db = mongoose.connection;
+db.on("error", console.error.bind(console, "MongoDB connection error: "));
+db.once("open", function(){
+    console.log("Application connected to MongoDB Atlas")
+});
+
+// set statements
+app.set("views", path.resolve(__dirname, "views"));
+app.set("view engine", "ejs");
 
 // use statements
 app.use(logger("short"));
@@ -33,87 +48,72 @@ app.use(function(request, response, next) {
     next();
 });
 
-// set statements
-app.set("views", path.resolve(__dirname, "views"));
-app.set("view engine", "ejs");
-
 // http calls
 app.get("/", function (req, res){
-    res.render("index",{
-        message: "Home Page"
+  res.render("index",{
+      message: "Home Page"
+  });
+});
+
+app.get("/list.ejs", function (request, response) {
+  Employee.find({}, function(error, employee) {
+    if (error) throw error;
+    response.render("list", {
+      title: "Employees List",
+      employee: employee
     });
+  });
 });
 
 app.get("/new.ejs", function(req, res) {
-    res.render('new', {
-      message: 'Add a New Employee'
-    });
+  res.render('new', {
+    message: 'Add a New Employee'
   });
+});
 
+app.get("/view/:queryName.ejs", function (request, response) {
+  var queryName = request.params.queryName;
+  Employee.find({"lastName": queryName}, function(error, employees) {
 
-  app.get("/list.ejs", function (request, response) {
-    Employee.find({}, (error, employees) => {
-      if (error) throw error;
-      response.render("list", {
-        title: "Employees List",
-        employees: employees
-      });
-    });
-  });
-
-
-  app.get("/view/:queryName.ejs", function (request, response) {
-    var queryName = request.params.queryName;
-    Employee.find({"lastName": queryName}, function(error, employees) {
-  
-      if (error) throw error;
-        console.log(employees);
-      if (employees.length > 0) {
-        response.render("view", {
-          title: "Employee Record",
-          employee: employees
-        })
-      }
-        else {
-          response.redirect("/list.ejs")
-        }
-    });
-  });
-
-  var employee = new Employee({
-    firstName: "Becca",
-    lastName: "Buechle"
-  });
-
-
-  app.post("/process", function(request, response) {
-    // console.log(request.body.txtName);
-    if (!request.body.txtFirstName || !request.body.txtLastName) {
-        response.status(400).send("Missing Required Field");
-      return;
+    if (error) throw error;
+      console.log(employees);
+    if (employees.length > 0) {
+      response.render("view", {
+        title: "Employee Record",
+        employee: employees
+      })
     }
-
-    // get the request’s form data
-    var firstName = request.body.txtFirstName;
-    var lastName = request.body.txtLastName;
-    console.log(firstName, lastName);
-   
-    // create a employee model
-    var employee = new Employee({
-      firstName: firstName,
-      lastName: lastName,
-    });
-    
-    // save
-    employee.save(function (error) {
-      if (error) throw error;
-      console.log(firstName + " saved successfully!");
-    });
-    response.redirect("/");
+      else {
+        response.redirect("/list.ejs")
+      }
   });
+});
 
-// database connection string to MongoDB 
-var conn = "mongodb+srv://rbuechle:Seattle06@cluster0-japve.mongodb.net/test?retryWrites=true&w=majority"
+app.post("/process", function(request, response) {
+  // console.log(request.body.txtName);
+  if (!request.body.txtFirstName || !request.body.txtLastName) {
+      response.status(400).send("Missing Required Field");
+    return;
+  }
+
+ // get the request’s form data
+ var firstName = request.body.txtFirstName;
+ var lastName = request.body.txtLastName;
+
+// create a employee model
+var employee = new Employee({
+  firstName: firstName,
+  lastName: lastName
+});
+    
+// save
+employee.save(function (error) {
+  if (error) throw error;
+    console.log(firstName + " saved successfully!");
+  });
+  response.redirect("/");
+});
+
 mongoose.connect(conn, {
     promiseLibrary: require('bluebird'),
     useUnifiedTopology: true,
@@ -123,20 +123,6 @@ mongoose.connect(conn, {
     console.log('Connection to the database instance was successful');
   }).catch(err => {
     console.log(`MongoDB Error: ${err.message}`);
-  });
-
-mongoose.Promise = global.Promise;
-
-var db = mongoose.connection;
-db.on("error", console.error.bind(console, "MongoDB connection error: "));
-db.once("open", function(){
-    console.log("Application connected to MongoDB Atlas")
-});
-
-
-var employee = new Employee({
-    firstName: 'Becca',
-    lastName: 'Buechle'
   });
 
 //start server
