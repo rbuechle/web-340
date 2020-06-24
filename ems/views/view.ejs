@@ -1,3 +1,13 @@
+<!--/*
+============================================
+; Title: EMS Database With Mongo
+; Author: Peter Itskovich / Becca Buechle 
+; Date: 24 May 2020
+; Modified By: Becca Buechle 
+; Description: EMS Database With Mongo
+;===========================================
+*/-->  
+    
     <%- include('header') -%>
     <%- include('navbar') -%>
 
@@ -8,6 +18,8 @@
       <h2>Employee Record</h2>
       <br />
       <div>
+      
+        <!-- Form with first last name-->
         <div class="form-group">
           <label for="txtFirstName">First Name:</label>
             <input type="text" class="form-control" id="firstName" value="<%= employee[0].firstName %>" name="firstName" />
@@ -20,6 +32,7 @@
 
       <br /><br />
 
+      <!-- Link to list of emps-->
       <a href="/list.ejs">&larr; Return to Employee List</a>
 
     </div>
